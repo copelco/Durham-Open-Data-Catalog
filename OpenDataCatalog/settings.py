@@ -227,17 +227,11 @@ LOGGING = {
     }
 }
 
-try:
-    from local_settings import *
-except Exception:
-    pass
-
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    LOCAL_STATICFILE_DIR,
     os.path.abspath(os.path.join(os.path.dirname(__file__),
                                  'opendata/static')),
 )
@@ -246,8 +240,5 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    LOCAL_TEMPLATE_DIR,
     os.path.join(os.path.dirname(__file__), 'templates')
 )
-
-LOGIN_URL = SITE_ROOT + "/accounts/login/"
