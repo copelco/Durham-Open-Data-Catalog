@@ -1,0 +1,7 @@
+-r base.txt
+django-debug-toolbar==0.9.4
+fabric==1.6.0
+ssh==1.7.14
+pycrypto==2.6.0
+Jinja2==2.6
+argyle==0.2.0
