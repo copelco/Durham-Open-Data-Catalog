@@ -10,3 +10,5 @@ static/*
 .#*
 local_settings.py
 local.py
+public/static/
+public/media/
