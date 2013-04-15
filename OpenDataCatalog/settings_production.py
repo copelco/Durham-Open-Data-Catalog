@@ -2,7 +2,7 @@ import os
 
 from settings import *
 
-SITE_ROOT = 'http://opendatacatalog.mycity.gov:8000'
+SITE_ROOT = ''
 
 LOGIN_URL = SITE_ROOT + "/accounts/login/"
 
