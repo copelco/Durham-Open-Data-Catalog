@@ -13,7 +13,7 @@ LOGIN_URL = SITE_ROOT + "/accounts/login/"
 #                              '../../ODC-overlay/templates'))
 
 # ReCatchpa stuff
-RECAPTCHA_PUBLIC_KEY = ''
+RECAPTCHA_PUBLIC_KEY = '6LfU8t8SAAAAAJKrpalcrjlSA6zf9SIJaMBbz33s'
 RECAPTCHA_PRIVATE_KEY = ''
 
 # Twitter stuff
