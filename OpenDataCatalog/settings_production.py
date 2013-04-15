@@ -24,17 +24,17 @@ AWS_ACCESS_KEY = None
 AWS_SECRET_KEY = None
 
 # Contacts
-mx_host = 'mycity.gov'
+# mx_host = 'mycity.gov'
 ADMINS = (
-     ('OpenData Admins', 'admin@%s' % (mx_host,)),
+     ('Colin', 'copelco@caktusgroup.com'),
 )
-CONTACT_EMAILS = ['admin@%s' % (mx_host,),]
-DEFAULT_FROM_EMAIL = 'OpenData Site <noreply@%s>'
+CONTACT_EMAILS = ['copelco@caktusgroup.com']
+DEFAULT_FROM_EMAIL = 'OpenData Site <noreply@example.com>'
 EMAIL_SUBJECT_PREFIX = '[OpenDataCatalog - MYCITY] '
-SERVER_EMAIL = 'OpenData Team <info@%s>' % (mx_host,)
+SERVER_EMAIL = 'OpenData Team <info@example.com>'
 
 MANAGERS = (
-     ('OpenData Team', 'info@%s' % (mx_host,)),
+     ('Colin', 'copelco@caktusgroup.com'),
 )
 
 DATABASES = {
