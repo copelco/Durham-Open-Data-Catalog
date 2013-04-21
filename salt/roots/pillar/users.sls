@@ -1,6 +1,6 @@
 users:
     vagrant:
-        groups: [login]
+        groups: [login, admin]
     opendata:
         groups: [www-data, login]
         public_key:

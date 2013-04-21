@@ -33,8 +33,8 @@ env.ARGYLE_TEMPLATE_DIRS = (
 @task
 def vagrant():
     env.environment = 'production'
-    env.hosts = ['192.168.50.5']
-    env.port = 22
+    env.hosts = ['127.0.0.1']
+    env.port = 2222
     env.branch = 'master'
     env.server_name = 'dev.example.com'
     setup_path()
@@ -105,7 +105,7 @@ def setup_server(*roles):
         # http://serverfault.com/questions/107187/sudo-su-username-while-keeping-ssh-key-forwarding
         with settings(user=env.project_user):
             if not files.exists(env.code_root):
-                run('git clone %(repo)s %(code_root)s' % env)
+                run('git clone --quiet %(repo)s %(code_root)s' % env)
             with cd(env.code_root):
                 run('git checkout %(branch)s' % env)
                 run('git pull')
@@ -121,7 +121,7 @@ def setup_server(*roles):
         if not test_for_virtualenv:
             sudo("pip install -U virtualenv")
         if not files.exists(env.virtualenv_root):
-            project_run('virtualenv -p python2.7 --clear --distribute %s' % env.virtualenv_root)
+            project_run('virtualenv -p python2.7 --quiet --clear --distribute %s' % env.virtualenv_root)
             # TODO: Why do we need this next part?
             path_file = os.path.join(env.virtualenv_root, 'lib', 'python2.7', 'site-packages', 'project.pth')
             files.append(path_file, env.project_root, use_sudo=True)
@@ -146,7 +146,7 @@ def project_run(cmd):
 def update_requirements():
     """Update required Python libraries."""
     require('environment')
-    project_run(u'HOME=%(home)s %(virtualenv)s/bin/pip install --use-mirrors -r %(requirements)s' % {
+    project_run(u'HOME=%(home)s %(virtualenv)s/bin/pip install --quiet --use-mirrors -r %(requirements)s' % {
         'virtualenv': env.virtualenv_root,
         'requirements': os.path.join(env.code_root, 'requirements', 'base.txt'),
         'home': env.home,
