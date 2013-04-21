@@ -127,6 +127,8 @@ def setup_server(*roles):
             files.append(path_file, env.project_root, use_sudo=True)
             sudo('chown %s:%s %s' % (env.project_user, env.project_user, path_file))
         update_requirements()
+        upload_local_settings()
+        syncdb()
         upload_supervisor_app_conf(app_name=u'gunicorn')
         upload_supervisor_app_conf(app_name=u'group')
         # Restart services to pickup changes
