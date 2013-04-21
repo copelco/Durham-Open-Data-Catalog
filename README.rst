@@ -33,7 +33,7 @@ Vagrant Testing
 
 You can test the provisioning/deployment using `Vagrant <http://vagrantup.com/>`_.
 
-After installing Vagrant, install `Salty Vagrant <https://github.com/saltstack/salty-vagrant>`_:
+After installing Vagrant, install `Salty Vagrant <https://github.com/saltstack/salty-vagrant>`_::
 
     vagrant plugin install vagrant-salt
 
@@ -46,7 +46,7 @@ box::
 
     vagrant up
 
-You can find out how ssh is set up by running:
+You can find out how ssh is set up by running::
 
     vagrant ssh_config
 
