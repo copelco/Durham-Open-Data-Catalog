@@ -10,7 +10,7 @@ from argyle.supervisor import supervisor_command, upload_supervisor_app_conf
 from argyle.system import service_command, start_service, stop_service, restart_service
 
 from fabric.api import cd, env, get, hide, local, put, require, run, settings, sudo, task
-from fabric.contrib import files, console
+from fabric.contrib import files, console, project
 
 # Directory structure
 PROJECT_ROOT = os.path.dirname(__file__)
@@ -21,7 +21,7 @@ env.project_user = 'opendata'
 env.repo = u'git@github.com:copelco/Durham-Open-Data-Catalog.git'
 env.shell = '/bin/bash -c'
 env.disable_known_hosts = True
-env.port = 2222
+env.port = 22
 env.forward_agent = True
 
 # Additional settings for argyle
@@ -43,9 +43,9 @@ def vagrant():
 @task
 def production():
     env.environment = 'production'
-    env.hosts = [] # FIXME: Add production hosts
+    env.hosts = ['50.17.226.149']
     env.branch = 'master'
-    env.server_name = '' # FIXME: Add production server name
+    env.server_name = 'opendatadurham.org'
     setup_path()
 
 
@@ -133,7 +133,8 @@ def setup_server(*roles):
         upload_supervisor_app_conf(app_name=u'group')
         # Restart services to pickup changes
         supervisor_command('reload')
-        supervisor_command('restart %(environment)s:*' % env)
+        supervisor_command('stop %(environment)s:*' % env)
+        supervisor_command('start %(environment)s:*' % env)
     if 'lb' in roles:
         nginx.remove_default_site()
         nginx.upload_nginx_site_conf(site_name=u'%(project)s-%(environment)s.conf' % env)
@@ -250,3 +251,17 @@ def load_db_dump(dump_file):
     temp_file = os.path.join(env.home, '%(environment)s.sql' % env)
     put(dump_file, temp_file, use_sudo=True)
     sudo('psql -d %s -f %s' % (env.db, temp_file), user=env.project_user)
+
+
+@task
+def salt_bootstrap():
+    salt_base = os.path.join(PROJECT_ROOT, "salt/")
+    minion_file = os.path.join(salt_base, "minion")
+    put(minion_file, "/etc/salt/minion", use_sudo=True)
+    salt_root = os.path.join(salt_base, 'roots/')
+    project.rsync_project(local_dir=salt_root, remote_dir="/tmp/salt",
+                          delete=True)
+    sudo('rm -rf /srv/*')
+    sudo('mv /tmp/salt/* /srv/')
+    sudo('chown root:root -R /srv/')
+    sudo('salt-call --local state.highstate -l debug')

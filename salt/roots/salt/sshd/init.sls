@@ -4,7 +4,7 @@ ssh:
     service.running:
         - enable: True
         - watch:
-            - file: ssh
+            - file: /etc/ssh/sshd_config
             - pkg: ssh
     require:
       - group: login 

@@ -1,6 +1,8 @@
 users:
     vagrant:
         groups: [login, admin]
+    ubuntu:
+        groups: [login, admin]
     opendata:
         groups: [www-data, login]
         public_key:

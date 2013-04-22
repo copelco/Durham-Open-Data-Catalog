@@ -107,3 +107,10 @@ web site:
    if you changed it in the fabfile).
 
 2. Visit `http://dev.example.com:8089/`
+
+Deployment
+----------
+
+Run ``salt_bootstrap``, e.g.:
+
+fab -H ubuntu@ec2-23-20-127-243.compute-1.amazonaws.com -i ~/.ssh/Colin.pem -u ubuntu salt_bootstrap
