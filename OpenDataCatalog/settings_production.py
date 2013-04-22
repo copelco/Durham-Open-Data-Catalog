@@ -1,6 +1,6 @@
-import os
-
 from settings import *
+
+DEBUG = False
 
 SITE_ROOT = ''
 
@@ -26,7 +26,7 @@ AWS_SECRET_KEY = None
 # Contacts
 # mx_host = 'mycity.gov'
 ADMINS = (
-     ('Colin', 'copelco@caktusgroup.com'),
+    ('Colin', 'copelco@caktusgroup.com'),
 )
 CONTACT_EMAILS = ['copelco@caktusgroup.com']
 DEFAULT_FROM_EMAIL = 'OpenData Site <noreply@example.com>'
@@ -34,7 +34,7 @@ EMAIL_SUBJECT_PREFIX = '[OpenDataCatalog - MYCITY] '
 SERVER_EMAIL = 'OpenData Team <info@example.com>'
 
 MANAGERS = (
-     ('Colin', 'copelco@caktusgroup.com'),
+    ('Colin', 'copelco@caktusgroup.com'),
 )
 
 DATABASES = {
@@ -54,4 +54,3 @@ INSTALLED_APPS += (
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'insecure'
-
